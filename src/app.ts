@@ -1,5 +1,8 @@
-import express from "express"
+import express, { json } from "express";
+import router from "./routes";
 
-const app = express()
+const app = express();
+app.use(json());
+app.use("/", router)
 
-export default app
+export default app;
