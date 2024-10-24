@@ -10,6 +10,15 @@ class subjectController {
       next(error);
     }
   }
+
+  static async create(req: Request, res: Response, next: NextFunction) {
+    try {
+        const subjects = await subjectService.create(req.body)
+        res.status(201).json({data: subjects})
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default subjectController;

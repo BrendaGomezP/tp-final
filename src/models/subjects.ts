@@ -4,10 +4,9 @@ const Subject = sequelize.define(
   "Subject",
   {
     id: {
-      type: DataTypes.INTEGER, //----> EN LA CONSIGA DICE STRIG VEEEEEERRRRR
+      type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -27,6 +26,6 @@ const Subject = sequelize.define(
   }
 );
 
-Subject.sync();
+Subject.sync({force: true});
 
 export default Subject;
