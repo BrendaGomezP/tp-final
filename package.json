@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsnd ./src/index.ts --env development",
-    "build": "tsc"
+    "dev": "tsnd ./src/index.ts --env development"
   },
   "keywords": [],
   "author": "",
