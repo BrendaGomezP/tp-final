@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsnd ./src/index.ts --env development",
-    "build": "tsc",
-    "start": "node ./dist/index.js",
-    "start-dev": "node ./dist/index.js --env development"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
