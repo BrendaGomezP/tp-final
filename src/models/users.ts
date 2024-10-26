@@ -1,31 +1,38 @@
 import sequelize, { DataTypes } from "../database/db";
 
-const Subject = sequelize.define(
-  "Subject",
+const User = sequelize.define(
+  "User",
   {
     id: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
     },
-    name: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    startDate: {
+    fullName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    birthdate: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    endDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-  },
+    nacionality: {
+      type: DataTypes.STRING,
+      allowNull: false
+  }},
   {
     timestamps: false,
   }
 );
 
-//Subject.sync();
+//  User.sync({alter: true})
 
-export default Subject;
+export default User;

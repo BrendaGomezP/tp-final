@@ -3,7 +3,7 @@ import Subject from "../models/subjects";
 import { subjectValidator } from "../schemas/subjects";
 import { v4 as uuidv4 } from "uuid";
 
-class subjectService {
+class SubjectService {
   static async getAll() {
     try {
       const subject = await Subject.findAll();
@@ -30,6 +30,22 @@ class subjectService {
       throw error;
     }
   }
+//   static async Update(data) {
+//     try {
+//       const subject = await Subject.update(data, {where:{}});
+//       return subject;
+//     } catch (error) {
+//       throw error;
+//     }
+//   }
+//   static async delete() {
+//     try {
+//       const subject = await Subject.destroy({where:{}});
+//       return subject;
+//     } catch (error) {
+//       throw error;
+//     }
+//   }
 }
 
-export default subjectService;
+export default SubjectService;

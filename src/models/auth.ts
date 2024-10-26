@@ -1,31 +1,24 @@
 import sequelize, { DataTypes } from "../database/db";
 
-const Subject = sequelize.define(
-  "Subject",
+const Auth = sequelize.define(
+  "Auth",
   {
     id: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
     },
-    name: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    startDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    endDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
+   
   },
   {
     timestamps: false,
   }
 );
 
-//Subject.sync();
+//  Auth.sync({alter: true});
 
-export default Subject;
+export default Auth;
