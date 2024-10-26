@@ -1,9 +1,9 @@
 import { Router } from "express";
-import subjectController from "../controllers/subjects";
+import SubjectController from "../controllers/subjects";
 
 const subject = Router()
-subject.get("/", subjectController.getAll)
-subject.post("/", subjectController.create)
+subject.get("/", SubjectController.getAll)
+subject.post("/", SubjectController.create)
 
 
 export default subject
