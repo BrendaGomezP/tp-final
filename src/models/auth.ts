@@ -19,6 +19,6 @@ const Auth = sequelize.define(
   }
 );
 
-//  Auth.sync({alter: true});
+//Auth.sync({alter: true});
 
 export default Auth;
