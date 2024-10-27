@@ -14,7 +14,6 @@ class AuthService {
         throw error
       }
       const { password, ...user } = result.data
-      console.log(user);
       
       const findEmail = await UserService.getEmail(user.email)
       if (findEmail) {
@@ -24,10 +23,10 @@ class AuthService {
         throw error
       }
 
-      const newUser = await UserService.create(user)
-      const userId = newUser
-      console.log(userId);
-      
+      const userId = await UserService.create(user)
+      const id = uuidv4()
+      const authDb = await Auth.create({id: id, UserId: userId, password: password})
+      return authDb      
 
     } catch (error) {
       throw error;

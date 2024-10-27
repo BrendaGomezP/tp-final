@@ -12,7 +12,7 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    fullName: {
+    fullname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -24,7 +24,7 @@ const User = sequelize.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    nacionality: {
+    nationality: {
       type: DataTypes.STRING,
       allowNull: false
   }},
@@ -33,6 +33,6 @@ const User = sequelize.define(
   }
 );
 
-User.sync({alter: true})
+//User.sync({alter: true})
 
 export default User;

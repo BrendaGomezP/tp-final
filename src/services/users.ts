@@ -1,12 +1,12 @@
 import User from "../models/users";
 import { v4 as uuidv4 } from "uuid";
+import { userValidator } from "../schemas/users";
 
 class UserService {
   static async getEmail(email) {
     try {
-      const user = await User.findOne({ where: { email: email } })
-      return user
-
+      const user = await User.findOne({ where: { email: email } });
+      return user;
     } catch (error) {
       throw error;
     }
@@ -15,17 +15,27 @@ class UserService {
     try {
       const id = uuidv4();
       const user = await User.create({
-        id: id, 
-        username: data.username, 
+        id: id,
+        username: data.username,
         fullname: data.fullname,
         email: data.email,
         birthdate: data.birthdate,
         nationality: data.nationality,
-      })
-      console.log("Llego hasta aca");
-      
-      return user
+      });
 
+      return user.dataValues.id;
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async update(data, id) {
+    try {
+      const result = userValidator(data);
+      if (!result.success) {
+        return "Datos Inválidos";
+      }
+      const user = await User.update(result.data, { where: { id: id } });
+      return user;
     } catch (error) {
       throw error;
     }

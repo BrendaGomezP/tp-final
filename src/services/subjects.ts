@@ -30,22 +30,22 @@ class SubjectService {
       throw error;
     }
   }
-//   static async Update(data) {
-//     try {
-//       const subject = await Subject.update(data, {where:{}});
-//       return subject;
-//     } catch (error) {
-//       throw error;
-//     }
-//   }
-//   static async delete() {
-//     try {
-//       const subject = await Subject.destroy({where:{}});
-//       return subject;
-//     } catch (error) {
-//       throw error;
-//     }
-//   }
+  // static async update(data) {
+  //   try {
+  //     const subject = await Subject.update(data, { where: {} });
+  //     return subject;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
+  //   static async delete() {
+  //     try {
+  //       const subject = await Subject.destroy({where:{}});
+  //       return subject;
+  //     } catch (error) {
+  //       throw error;
+  //     }
+  //   }
 }
 
 export default SubjectService;
