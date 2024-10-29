@@ -6,7 +6,7 @@ class UserService {
   static async getEmail(email) {
     try {
       const user = await User.findOne({ where: { email: email } });
-      return user;
+      return user.dataValues;
     } catch (error) {
       throw error;
     }
