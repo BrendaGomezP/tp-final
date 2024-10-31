@@ -12,8 +12,8 @@ class AuthController {
   }
   static async login(req: Request, res: Response, next: NextFunction) {
     try {
-      await AuthService.login(req.body);
-      res.status(200).json({ message: "Bienvenido" });
+     const token = await AuthService.login(req.body);
+      res.status(200).json({ message: "Bienvenido", token });
     } catch (error) {
       next(error);
     }

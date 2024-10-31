@@ -19,6 +19,14 @@ class SubjectController {
       next(error);
     }
   }
+  static async update(req: Request, res: Response, next: NextFunction) {
+    try {
+        const subjects = await SubjectService.update(req.body, req.query.name)
+        res.status(201).json({data: subjects})
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default SubjectController;

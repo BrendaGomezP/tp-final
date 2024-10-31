@@ -6,6 +6,9 @@ class UserService {
   static async getEmail(email) {
     try {
       const user = await User.findOne({ where: { email: email } });
+      if (!user) { 
+        return user        
+      }
       return user.dataValues;
     } catch (error) {
       throw error;
@@ -22,7 +25,7 @@ class UserService {
         birthdate: data.birthdate,
         nationality: data.nationality,
       });
-
+      
       return user.dataValues.id;
     } catch (error) {
       throw error;
