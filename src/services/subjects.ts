@@ -1,8 +1,7 @@
-import { number } from "zod";
 import Subject from "../models/subjects";
 import { subjectValidator, updateValidator } from "../schemas/subjects";
 import { v4 as uuidv4 } from "uuid";
-import { where } from "sequelize";
+import { Op } from "@sequelize/core";
 
 class SubjectService {
   static async getAll() {
@@ -22,13 +21,12 @@ class SubjectService {
 
         throw error;
       }
-      const name = await this.getName(result.data.name)
+      const name = await this.getName(result.data.name);
       if (name) {
         const error = new Error("La materia ya existe");
         error["statusCode"] = 400;
 
         throw error;
-        
       }
       const id = uuidv4();
       const subject = await Subject.create({
@@ -44,37 +42,59 @@ class SubjectService {
   }
   static async update(data, name) {
     try {
-      const result = updateValidator(data) 
+      const result = updateValidator(data);
       if (!result.success) {
         const error = new Error("Datos inválidos");
         error["statusCode"] = 400;
 
         throw error;
       }
-      const subject = await Subject.update(result.data, { where: {name: name.toLowerCase()} }); //--->VER
-      console.log(result.data);//--->IMPRIME LA FECHA MODIFICADA PERO NO ACTUALIZA EN TABLA
-      console.log(where);
-      console.log(name);
-      
+      const subject = await Subject.update(result.data, {
+        where: { name: { [Op.iLike]: name } },
+      });
+
+      if (subject[0] == 0) {
+        const error = new Error("La clase ingresada no existe");
+        error["statusCode"] = 400;
+
+        throw error;
+      }
+
       return subject;
     } catch (error) {
       throw error;
     }
   }
-  //   static async delete() {
-  //     try {
-  //       const subject = await Subject.destroy({where:{}});
-  //       return subject;
-  //     } catch (error) {
-  //       throw error;
-  //     }
-  //   }
+  static async delete(name) {
+    try {
+      if (!name) {
+        const error = new Error("Datos inválidos: ingrese el nombre de la clase");
+        error["statusCode"] = 400;
+
+        throw error;
+      }
+      const subject = await Subject.destroy({
+        where: { name: { [Op.iLike]: name } },
+      });
+
+      if (subject == 0) {
+        const error = new Error("La clase ingresada es inválida");
+        error["statusCode"] = 400;
+
+        throw error;
+      }
+
+      return subject;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   static async getName(name) {
     try {
       const subject = await Subject.findOne({ where: { name: name } });
-      if (!subject) { 
-        return subject        
+      if (!subject) {
+        return subject;
       }
       return subject.dataValues;
     } catch (error) {

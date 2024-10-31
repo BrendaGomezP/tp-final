@@ -22,6 +22,7 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "@sequelize/core": "^7.0.0-alpha.43",
     "express": "^4.21.1",
     "jsonfile": "^6.1.0",
     "jsonwebtoken": "^9.0.2",

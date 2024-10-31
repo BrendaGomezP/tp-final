@@ -22,7 +22,15 @@ class SubjectController {
   static async update(req: Request, res: Response, next: NextFunction) {
     try {
         const subjects = await SubjectService.update(req.body, req.query.name)
-        res.status(201).json({data: subjects})
+        res.status(200).json({data: subjects})
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async delete(req: Request, res: Response, next: NextFunction) {
+    try {
+        const subjects = await SubjectService.delete(req.query.name)
+        res.status(200).json({data: subjects})
     } catch (error) {
       next(error);
     }
