@@ -18,6 +18,9 @@ const Auth = sequelize.define(
     timestamps: false,
   }
 );
+Auth.beforeDestroy(() => {
+  console.log('Auth has been destroyed');
+});
 
 //Auth.sync({alter: true});
 

@@ -21,7 +21,6 @@ class AuthService {
       const { password, ...user } = result.data;
 
       const findEmail = await UserService.getEmail(user.email);
-      console.log(findEmail);
 
       if (findEmail) {
         const error = new Error("El email ya existe");
@@ -88,6 +87,7 @@ class AuthService {
       throw error;
     }
   }
+  
 }
 
 export default AuthService;

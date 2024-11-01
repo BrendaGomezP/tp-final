@@ -10,6 +10,15 @@ class UserController {
       next(error);
     }
   }
+
+  static async delete(req: Request, res: Response, next: NextFunction) {
+    try {
+        const user = await UserService.delete(req.query.name)
+        res.status(200).json({data: user})
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default UserController;

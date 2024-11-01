@@ -1,6 +1,7 @@
 import User from "../models/users";
 import { v4 as uuidv4 } from "uuid";
 import { userValidator } from "../schemas/users";
+import { Op } from "@sequelize/core"; 
 
 class UserService {
   static async getEmail(email) {
@@ -38,6 +39,30 @@ class UserService {
         return "Datos Inválidos";
       }
       const user = await User.update(result.data, { where: { id: id } });
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async delete(fullname) {
+    try {
+      if (!fullname) {
+        const error = new Error("Datos inválidos: ingrese el nombre del usuario");
+        error["statusCode"] = 400;
+
+        throw error;
+      }
+      const user = await User.destroy({
+        where: { fullname: { [Op.iLike]: fullname } },
+      });
+
+      if (user == 0) {
+        const error = new Error("El nombre ingresado es inválido");
+        error["statusCode"] = 400;
+
+        throw error;
+      }
+
       return user;
     } catch (error) {
       throw error;
