@@ -10,7 +10,6 @@ class AuthService {
   static async register(data) {
     try {
       const result = authValidator(data);
-      console.log(result.data);
 
       if (!result.success) {
         const error = new Error("Datos inválidos");
@@ -24,6 +23,15 @@ class AuthService {
 
       if (findEmail) {
         const error = new Error("El email ya existe");
+        error["statusCode"] = 400;
+
+        throw error;
+      }
+
+      const findUsername = await UserService.getUsername(user.username);
+
+      if (findUsername) {
+        const error = new Error("El nombre de usuario ya existe, por favor ingrese otro");
         error["statusCode"] = 400;
 
         throw error;

@@ -44,26 +44,37 @@ class UserService {
       throw error;
     }
   }
-  static async delete(fullname) {
+  static async delete(username) {
     try {
-      if (!fullname) {
+      if (!username) {
         const error = new Error("Datos inválidos: ingrese el nombre del usuario");
         error["statusCode"] = 400;
 
         throw error;
       }
       const user = await User.destroy({
-        where: { fullname: { [Op.iLike]: fullname } },
+        where: { username: { [Op.iLike]: username } },
       });
 
-      if (user == 0) {
+      if (user[0] == 0) {
         const error = new Error("El nombre ingresado es inválido");
         error["statusCode"] = 400;
 
         throw error;
       }
-
       return user;
+      
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async getUsername(username) {
+    try {
+      const user = await User.findOne({ where: { username: username } });
+      if (!user) {
+        return user;
+      }
+      return user.dataValues;
     } catch (error) {
       throw error;
     }

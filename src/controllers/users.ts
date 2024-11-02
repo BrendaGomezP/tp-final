@@ -13,7 +13,7 @@ class UserController {
 
   static async delete(req: Request, res: Response, next: NextFunction) {
     try {
-        const user = await UserService.delete(req.query.name)
+        const user = await UserService.delete(req.query.username)
         res.status(200).json({data: user})
     } catch (error) {
       next(error);
