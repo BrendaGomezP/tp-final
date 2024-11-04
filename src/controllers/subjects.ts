@@ -35,6 +35,17 @@ class SubjectController {
       next(error);
     }
   }
+
+  static async joinSubject(req: Request, res: Response, next: NextFunction) {
+    try {
+        await SubjectService.joinSubject(req.query.username, req.query.name)
+        res.status(200).json({message: "Vinculaciòn exitosa"})
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
 }
 
 export default SubjectController;

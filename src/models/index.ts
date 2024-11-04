@@ -8,5 +8,5 @@ Auth.belongsTo(User)
 Subject.belongsToMany(User, {through: "UserSubject"})
 User.belongsToMany(Subject, {through: "UserSubject"})
 
-sequelize.sync()
+//sequelize.sync()
 

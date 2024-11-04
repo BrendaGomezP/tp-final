@@ -1,7 +1,9 @@
 import Subject from "../models/subjects";
+import UserService from "./users";
 import { subjectValidator, updateValidator } from "../schemas/subjects";
 import { v4 as uuidv4 } from "uuid";
 import { Op } from "@sequelize/core";
+import sequelize from "../database/db";
 
 class SubjectService {
   static async getAll() {
@@ -35,6 +37,8 @@ class SubjectService {
         startDate: result.data.startDate,
         endDate: result.data.endDate,
       });
+      console.log(subject, "2");
+      
       return subject;
     } catch (error) {
       throw error;
@@ -93,10 +97,25 @@ class SubjectService {
   static async getName(name) {
     try {
       const subject = await Subject.findOne({ where: { name: name } });
+      console.log(subject, "1");
       if (!subject) {
         return subject;
       }
+      
       return subject.dataValues;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async joinSubject(username, name) {
+    try {
+      const user = await UserService.getUsername(username)
+      const newSubject = await this.getName(name)
+      const result = await user.addSubject(newSubject)
+      console.log(result);
+      
+     
     } catch (error) {
       throw error;
     }
