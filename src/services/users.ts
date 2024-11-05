@@ -74,7 +74,6 @@ class UserService {
       if (!user) {
         return user;
       }
-      console.log(user, "user");
       
       return user.dataValues;
     } catch (error) {
