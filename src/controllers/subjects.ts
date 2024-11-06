@@ -22,17 +22,17 @@ class SubjectController {
   }
   static async update(req: Request, res: Response, next: NextFunction) {
     try {
-        const subjects = await SubjectService.update(req.body, req.query.name)
-        res.status(200).json({data: subjects})
+        await SubjectService.update(req.body, req.query.name)
+        res.status(200).json({message: "Datos actualizados"})
     } catch (error) {
       next(error);
     }
   }
   static async delete(req: Request, res: Response, next: NextFunction) {
     try {
-        const subjects = await SubjectService.delete(req.query.name)
+        await SubjectService.delete(req.query.name)
         Logger.info("Se eliminó una clase");
-        res.status(200).json({data: subjects})
+        res.status(200).json({message: "Se eliminó la clase"})
     } catch (error) {
       next(error);
     }

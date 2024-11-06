@@ -1,19 +1,20 @@
-// import * as jwt from "jsonwebtoken";
+import * as jwt from "jsonwebtoken";
+import AuthService from "../services/auth";
 
-// async function checkJWT(req, res, next) {
-//   const token = req.headers.authorization?.split(" ")[1];
+async function checkJWT(req, res, next) {
+  const token = req.headers.authorization?.split(" ")[1];
 
-//   if (!token) return res.status(400).json({ message: "token is required" });
+  if (!token) return res.status(400).json({ message: "El token es requerido" });
 
-//   try {
-//     const data = jwt.verify(token, process.env.SECRET_KEY) as any;
+  try {
+    const data = jwt.verify(token, process.env.SECRET_KEY) as any;
 
-//     req._user = await getUserById(data.id);
+    await AuthService.getById(data.id);
 
-//     next();
-//   } catch (error) {
-//     res.status(401).json({ error: "token inválido" });
-//   }
-// }
+    next();
+  } catch (error) {
+    res.status(401).json({ error: "Token inválido" });
+  }
+}
 
-// export default checkJWT;
+export default checkJWT;
