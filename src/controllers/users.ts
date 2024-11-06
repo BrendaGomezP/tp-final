@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import UserService from "../services/users";
+import Logger from "../lib/winston";
 
 class UserController {
   static async update(req: Request, res: Response, next: NextFunction) {
@@ -14,6 +15,7 @@ class UserController {
   static async delete(req: Request, res: Response, next: NextFunction) {
     try {
         const user = await UserService.delete(req.query.username)
+        Logger.info("Se eliminó un usuario");
         res.status(200).json({data: user})
     } catch (error) {
       next(error);

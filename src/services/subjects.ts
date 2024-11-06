@@ -2,12 +2,14 @@ import Subject from "../models/subjects";
 import { subjectValidator, updateValidator } from "../schemas/subjects";
 import { v4 as uuidv4 } from "uuid";
 import { Op } from "@sequelize/core";
+import createFilter from "../utils/create-filter";
 import sequelize from "../database/db";
 
 class SubjectService {
-  static async getAll() {
+  static async getAll(data) {
     try {
-      const subject = await Subject.findAll();
+      const filters = createFilter(data) ;
+      const subject = await Subject.findAndCountAll(filters);
       return subject;
     } catch (error) {
       throw error;
@@ -36,7 +38,7 @@ class SubjectService {
         startDate: result.data.startDate,
         endDate: result.data.endDate,
       });
-      
+
       return subject;
     } catch (error) {
       throw error;
@@ -70,7 +72,9 @@ class SubjectService {
   static async delete(name) {
     try {
       if (!name) {
-        const error = new Error("Datos inválidos: ingrese el nombre de la clase");
+        const error = new Error(
+          "Datos inválidos: ingrese el nombre de la clase"
+        );
         error["statusCode"] = 400;
 
         throw error;
@@ -100,7 +104,7 @@ class SubjectService {
       if (!subject) {
         return subject;
       }
-      
+
       return subject.dataValues;
     } catch (error) {
       throw error;
@@ -109,4 +113,3 @@ class SubjectService {
 }
 
 export default SubjectService;
-
