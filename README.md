@@ -28,7 +28,7 @@ La documentación completa de la API, con ejemplos de uso y detalles de cada end
   - `POST /auth/login`: Inicio de sesión.
   
 - **Gestión de Usuarios**:
-  - `PUT /user/:id`: Actualizar datos de un usuario por ID.
+  - `PATCH /user/:id`: Actualizar datos de un usuario por ID.
   - `DELETE /user`: Eliminar un usuario por Username.
 
 - **Administración de Clases**:
@@ -36,6 +36,8 @@ La documentación completa de la API, con ejemplos de uso y detalles de cada end
   - `GET /subjects`: Visualizar todas las clases disponibles.
   - `PATCH /subjects`: Actualizar una clase.
   - `DELETE /subjects`: Eliminar una clase.
+  
+- **Inscripción a Clases**:
   - `POST /inscription/join`: Inscribir un usuario en una clase.
   - `DELETE /inscription/drop`: Desvincular un usuario de una clase.
 
@@ -45,7 +47,9 @@ Para acceder a la mayoría de las solicitudes de usuarios será necesario contar
 
 ## Autoras: GRUPO 3
 -Karen
+</p>
 -Brenda
+</p>
 -Yanina
 
 <img src=https://i.pinimg.com/originals/8b/19/fe/8b19feb0d9eec43509283e74917a7fe9.gif>
